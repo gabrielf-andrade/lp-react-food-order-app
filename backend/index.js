@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const port = process.env.PORT || 5000 
 
 app.use(express.json())
+app.use(cors())
 
-const DUMMY_MEALS = [
+const meals = [
     {
         id: 'm1',
         name: 'Sushi',
@@ -31,8 +33,14 @@ const DUMMY_MEALS = [
     },
 ]
 
-app.get('/meals', (req, res) => {
-    res.send(DUMMY_MEALS)
+app.get('/api/meals', (req, res) => {
+    res.send(meals)
 })
+
+app.post('/api/orders', (req, res) => {
+    // persist data
+    res.sendStatus(200)
+})
+
 
 app.listen(port, () => {console.log(`Server listening on port ${port}`)})
